@@ -12064,9 +12064,9 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Index 1 (0): Restaurant - This data point has more fresh, milk, and grocery than frozen, which could potentially be a restaurant and the food is predominantly freshly made.</p>
-<p>Index 70 (1): Supplier - This data point has a large amount of fresh and frozen food, which indicates they are a retailer, a mass producer or a marker for fresh/frozen food.</p>
-<p>Index 410 (2): A small grocery store or a small supermarket - This data point seems to carry a significant amount of every category though not too large. It does have a larger amount of fresh food than the others. This suggests that it could be a small grocery store or supermarket in an area.</p>
+<p>Index 1 (0): Restaurant - This data point has frozen well below the mean value. This customer spent above the median value of grocery category and well around the 75th percentile on grocery, detergents_paper and delicatessen items. Originally, I though it would be a retailer or a small grocery store ; however, as I noted the proportionality between Fresh and Frozen, I then changed my mind to a restaurant type that could potentially focus on making fresh vegetarian food. This is because having very little frozen food items would be consistent with a restaurant and the food is predominantly freshly made.</p>
+<p>Index 70 (1): Supplier - This data point has a large amount of fresh and frozen food, which indicates they are a retailer, a mass producer or a marker for fresh/frozen food. In particular, this customer is a heavy consumer of Fresh items since it is well beyong the mean value of this category and well around the 75 percentile. This customer also consumes a lot of frozen items, which is far above the mean value of this category. The other categories have very low values, even below their mean values. My original thought is a small traditional supermarket; however, a low quantity of grocery seems to not fit this prediction. So instead, I changed my mind and decided this is a mass producer that has a lot of fresh and frozen food.</p>
+<p>Index 410 (2): A small grocery store or a small supermarket - This data point seems to carry a significant amount of every category though not too large. It does have a larger amount of fresh food than the others. Specificially, all values are below their means except the Delicatessen, which is a little bit above its mean. All categories seem to fall within the range between the 25th percentile and 50th percentile. This suggests that it could be a small grocery store or supermarket in an area.</p>
 
 </div>
 </div>
@@ -12106,7 +12106,7 @@ div#notebook {
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">new_data</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fresh&#39;</span><span class="p">],</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># TODO: Create a decision tree regressor and fit it to the training set</span>
-<span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">regressor</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">predict</span> <span class="o">=</span> <span class="n">regressor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
@@ -12125,7 +12125,7 @@ div#notebook {
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-0.513315490851
+<pre>-0.923373659298
 </pre>
 </div>
 </div>
@@ -13672,7 +13672,7 @@ SUVORK5CYII=
 <li>Grocery and Milk: Another linear correlation </li>
 </ul>
 <p>From the above findings, we can determine that Detergents_Paper has a weak relevance in establishing the profile of the data, which means it should have a high R^2 and thus would not be able to give a lot of information gain.</p>
-<p>All the above pairs follow a linear correlation of y = mx + b with the distribution for the points seems to highly skewed towards the origin. This means the correlation does not follow a normal profile, which indicates a scaling on the data.</p>
+<p>All the above pairs follow a linear correlation of y = mx + b with the distribution for the points seems to have a positive skewness. This means the correlation does not follow a normal profile, which indicates a scaling on the data.</p>
 
 </div>
 </div>
@@ -18598,7 +18598,7 @@ UINJREREREQkATWYREREREREElCDSUREREREJIG/A8K0BagUTZuuAAAAAElFTkSuQmCC
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2b08f6f7b810&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2b07b8633fd0&gt;</pre>
 </div>
 
 </div>
@@ -19694,7 +19694,7 @@ Ajq6tegd7wAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
@@ -19719,7 +19719,7 @@ Ajq6tegd7wAAAABJRU5ErkJggg==
     <span class="n">score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">score</span>
 
-<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">])</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sihouette Score&#39;</span><span class="p">])</span>
 <span class="n">results</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Number of Clusters&#39;</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
     <span class="n">score</span> <span class="o">=</span> <span class="n">GMM_model</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
@@ -19743,101 +19743,82 @@ Ajq6tegd7wAAAABJRU5ErkJggg==
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th></th>
-      <th>Score</th>
+      <th>Number of Clusters</th>
       <th>Sihouette Score</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>2</th>
-      <td>NaN</td>
       <td>0.443601</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>NaN</td>
       <td>0.357295</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>NaN</td>
       <td>0.291646</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>NaN</td>
-      <td>0.266979</td>
+      <td>0.268910</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>NaN</td>
-      <td>0.309315</td>
+      <td>0.307123</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>NaN</td>
-      <td>0.294308</td>
+      <td>0.297643</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>NaN</td>
-      <td>0.312854</td>
+      <td>0.291111</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>NaN</td>
-      <td>0.283717</td>
+      <td>0.278444</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>NaN</td>
-      <td>0.258356</td>
+      <td>0.245355</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>NaN</td>
-      <td>0.243602</td>
+      <td>0.245947</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>NaN</td>
-      <td>0.163312</td>
+      <td>0.198756</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>NaN</td>
-      <td>0.198061</td>
+      <td>0.183502</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>NaN</td>
-      <td>0.173409</td>
+      <td>0.191094</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>NaN</td>
-      <td>0.144000</td>
+      <td>0.184577</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>NaN</td>
-      <td>0.165681</td>
+      <td>0.172164</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>NaN</td>
-      <td>0.123005</td>
+      <td>0.117071</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>NaN</td>
-      <td>0.150351</td>
+      <td>0.136833</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>NaN</td>
-      <td>0.150436</td>
+      <td>0.173392</td>
     </tr>
   </tbody>
 </table>
@@ -19883,7 +19864,7 @@ Ajq6tegd7wAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">clusterer</span> <span class="o">=</span> <span class="n">GMM</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -20534,7 +20515,7 @@ TkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Inverse transform the centers</span>
@@ -20644,7 +20625,7 @@ TkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the predictions</span>
@@ -20781,7 +20762,7 @@ Due to this classification, customers from segment 1 will not be affected as muc
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the clustering results based on &#39;Channel&#39; data</span>
