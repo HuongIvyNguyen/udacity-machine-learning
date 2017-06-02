@@ -8,7 +8,7 @@ class LearningAgent(Agent):
     """ An agent that learns to drive in the Smartcab world.
         This is the object you will be modifying. """ 
 
-    def __init__(self, env, learning=False, epsilon=1.0, alpha=0.5):
+    def __init__(self, env, learning=True, epsilon=1.0, alpha=0.5):
         super(LearningAgent, self).__init__(env)     # Set the agent in the evironment 
         self.planner = RoutePlanner(self.env, self)  # Create a route planner
         self.valid_actions = self.env.valid_actions  # The set of valid actions
@@ -18,7 +18,7 @@ class LearningAgent(Agent):
         self.Q = dict()          # Create a Q-table which will be a dictionary of tuples
         self.epsilon = epsilon   # Random exploration factor
         self.alpha = alpha       # Learning factor
-
+        self.counter = 0.0
         ###########
         ## TO DO ##
         ###########
@@ -39,7 +39,12 @@ class LearningAgent(Agent):
         # Update epsilon using a decay function of your choice
         # Update additional class parameters as needed
         # If 'testing' is True, set epsilon and alpha to 0
-
+        if testing:
+            self.epsilon = 0.0
+            self.alpha = 0.0
+        else:
+            self.counter += 1.0
+            self.epsilon = math.fabs(math.cos(self.alpha*self.counter))
         return None
 
     def build_state(self):
@@ -78,8 +83,10 @@ class LearningAgent(Agent):
         ###########
         # Calculate the maximum Q-value of all actions for a given state
 
-        maxQ = None
-
+        maxQ = -1000
+        for act in self.Q[state]:
+            if maxQ < self.Q[state][act]:
+                maxQ = self.Q[state][act]
         return maxQ 
 
 
@@ -92,7 +99,9 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-
+        if self.learning:
+            if state not in self.Q:
+                self.Q[state] = self.Q.get(state,  {None:0.0, 'forward':0.0, 'left':0.0, 'right':0.0} )
         return
 
 
@@ -135,7 +144,9 @@ class LearningAgent(Agent):
         ###########
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
-
+        old = self.Q[state][action]
+        if self.learning:
+            self.Q[state][action] = (1-self.alpha)*old + self.alpha*(reward)
         return
 
 
